@@ -7,15 +7,34 @@
   <title>Document</title>
 </head>
 <body>
+  
+
   <div id="app">
     <!-- ... -->
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
-    // var options = 
-    var vm = new Vue({
+
+    // **콘솔에서 vm이라고 치면 vue인스턴스 확인 가능함
+    // 생성자 관련 문서
+    // 1. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+    // 2. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/constructor
+
+    /*
+      var options = {
+        el: '#app',
+        data : {
+          message : 'hi'
+        }
+      }
+      var vm = new Vue(options);
+      //=> new Vue()라는 인스턴스를 생성해서 그 안에 options라는 객체를 만들어서 넣음
+    */
+    var vm = new Vue({ // 위의 방법 보다 <변수에 객체를 통채로 안에 넣어주는 것>이 더 가독성이 좋고 뷰 공식문서에서 게시한 형태
+      
       el: '#app',
+      // el : element, 바디 태그 안에서 app이라는 id를 가진 태그를 찾아서 new Vue({})인스턴스를 붙이겠다는 의미. 붙이는 순간 vue의 기능과 속성들이 유효해짐
       data: {
         message: 'hi'
       },

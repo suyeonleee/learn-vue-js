@@ -9,7 +9,11 @@
 <body>
   <div id="app">
     <button v-on:click="logText">click me</button>
-    <input type="text" v-on:keyup.enter="logText">
+    <input type="text" v-on:keyup.enter="logText"> 
+    <!--
+      v-on:keyup => 모든 키가 키업 될 때마다
+      v-on:keyup.enter => (이벤트모디파이어) 키 중에 엔터가 키업될 때마다
+    -->
     <button>add</button>
   </div>
 

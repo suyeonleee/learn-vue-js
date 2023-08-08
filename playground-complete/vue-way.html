@@ -11,32 +11,47 @@
 
   <script>
     var div = document.querySelector('#app');
+    //div.innerHTML = 'hello world';
+    //=> 이렇게 하지 않고 viewModel이라는 개체 선언
     var viewModel = {};
 
+    /* 
+    viewModel 선언 후 Object.defineProperty라는 api 사용해보자.
+    Object.defineProperty는 객체의 동작을 재정의하는 api이다.
+    */
     // Object.defineProperty(대상 객체, 객체의 속성, {
     //   // 정의할 내용
     // })
 
-    (function() {
+    (function() { // 즉시실행함수
+      /*
+        즉시실행함수 참고 페이지 : https://developer.mozilla.org/ko/docs/Glossary/IIFE
+        즉시실행 함수는 init과 render가 애플리케이션에 노출되지 않도록 코드를 또 다른 스코프(유효범위)에 넣어주는 것.
+        일반적으로 오픈소스 라이브러리들이 이런식으로 변수의 유효범위를 관리함.
+      */
+
+
       function init() {
-        Object.defineProperty(viewModel, 'str', {
-          // 속성에 접근했을 때의 동작을 정의
-          get: function() {
+        // viewModel이라는 대상 객체에 str이라는 속성과 get과 set을 선언
+        Object.defineProperty(viewModel, 'str', { 
+          
+          get: function() {// get : 속성에 접근했을 때의 동작을 정의
             console.log('접근');
           },
-          // 속성에 값을 할당했을 때의 동작을 정의
-          set: function(newValue) {
+          
+          set: function(newValue) {// set : 속성에 값을 할당했을 때의 동작을 정의 & 새로 할당된 값이 newValue라는 인자로 들어옴
             console.log('할당', newValue);
+            div.innerHTML = newValue; // 새로운 값을 받을때마다 div.innerHTML에 새로운 값을 써주면 계속 홤녀이 바뀌게됨
             render(newValue);
           }
         });
       }
 
-      function render(value) {
+      function render(value) { // init 함수 안에 set에서 값이 할당됐을때 div의 텍스트 값을 바꾸는 코드를 render함수 호출해서 값 넘겨줌
         div.innerHTML = value;
       }
 
-      init();
+      init(); // 호출부
     })();    
   </script>
 </body>

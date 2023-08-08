@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <!-- 1 -->
+    <div id="app">
+        <!--<app-header v-bind:프롭스속성이름="상위컴포넌트의 데이터 이름"></app-header>-->
+        <!--상위컴포넌트 Root, Root의 데이터 이름은 message -->
+        <app-header v-bind:propsdata="message"></app-header>
+    </div>
+
+    <script>
+        var appHeader = {
+            // template : '<h1>header</h1>',
+            // props : ['propsdata']
+            // props : [배열]
+        }
+
+        new Vue({
+            el: '#app',
+            components: {
+               'app-header': { 
+                    template: '<h1>header</h1>',
+                    props: ['propsdata']
+                }
+            },
+            data: {
+                message: 'hi'
+            }
+           
+        })
+    </script>
+
+    <!------------------------------------------------------------------------------------------------->
+
+    <!-- 2. components 속성을 따로 빼기 -->
+    <div id="app2">
+        <!--<app-header v-bind:프롭스속성이름="상위컴포넌트의 데이터 이름"></app-header>-->
+        <!--상위컴포넌트 Root, Root의 데이터 이름은 message -->
+        <app-header v-bind:propsdata="message"></app-header>
+    </div>
+    
+    <script>
+        var appHeader = {
+            template : '<h1>header</h1>',
+            props : ['propsdata']
+            // props : [배열]
+        }
+
+        new Vue({
+            el: '#app2',
+            components: {
+                'app-header': appHeader
+            },
+            data: {
+                message: 'hi'
+            }
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <!--
+                2.
+                router에서 페이지 이동을 하기 위한 링크태그
+                html에서 앵커 (<a href="">Login</a>) 와 같은 역할이라고 보면 됨.
+            -->
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>
+        </div>
+        <!--
+            1.
+            페이지 url이 이동했을때 변경된 url에 따라서 뿌려지는 페이지 영역을 router-view라는
+            router가 갖고있는 태그로 정의할 수 있음.
+            router-view는 view인스턴스에 router인스턴스를 연결해야지만 사용할 수 있음.
+        -->
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+    <script>
+        var LoginComponent = {
+            template : '<div>login</div>'
+        }
+
+        var MainComponent = {
+            template : '<div>main</div>'
+        }
+
+        var router = new VueRouter({
+            // mode: histroy를 넣으면
+            // http://127.0.0.1:5500/playground/router.html#/login 에서 /앞에 '#'가 없어짐
+            mode: 'history',
+
+            // 페이지의 라우팅 정보(어떤 url로 이동했을때 어떤 페이지가 뿌려질 지에 대한 정보)가 배열로 담기게 됨
+            // 페이지의 개수만큼 배열 안에 객체의 개수가 필요함
+            // ex.두 페이지를 보여주겠다
+            routes: [
+                {
+                    // 페이지의 url이름
+                    // http://127.0.0.1:5500/playground/router.html#/login
+                    path: '/login',
+                    // 해당 url에서 표시될 컴포넌트
+                    component: LoginComponent
+                },
+                {
+                    // url은 메인
+                    path : '/main',
+                    //컴포넌트 이름은 MainComponent
+                    component: MainComponent
+                }
+            ]
+
+            // ** 라우터의 네비게이션 가드
+            // https://joshua1988.github.io/web-development/vuejs/vue-router-navigation-guards/
+            // 위의 링크 참고할 것
+        });
+
+        new Vue({
+            el: '#app',
+            router: router
+        });
+    </script>
+</body>
+</html>
